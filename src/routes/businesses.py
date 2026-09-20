@@ -31,3 +31,4 @@ def create_business():
     db.session.commit()
 
     return jsonify(new_business.to_dict()), 201
+

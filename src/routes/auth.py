@@ -9,23 +9,25 @@ auth_bp = Blueprint("auth", __name__, url_prefix="/api/auth")
 
 @auth_bp.route("/register", methods=["POST"])
 def register():
-    """Create a new user. Body: {full_name, email, password, role_id, business_id}"""
+    """Create a new user. Body: {first_name, last_name, email, password, role_id, business_id}"""
     data = request.get_json(silent=True) or {}
 
-    full_name = data.get("full_name")
+    first_name = data.get("first_name")
+    last_name= data.get("last_name")
     email = data.get("email")
     password = data.get("password")
     role_id = data.get("role_id")
     business_id = data.get("business_id")
 
-    if not all([full_name, email, password, role_id, business_id]):
-        return jsonify({"error": "full_name, email, password, role_id, and business_id are all required"}), 400
+    if not all([first_name, last_name, email, password, role_id, business_id]):
+        return jsonify({"error": "first_name, last_name, email, password, role_id, and business_id are all required"}), 400
 
     if User.query.filter_by(email=email).first():
         return jsonify({"error": "A user with this email already exists"}), 409
 
     new_user = User(
-        full_name=full_name,
+        first_name=first_name,
+        last_name=last_name,
         email=email,
         role_id=role_id,
         business_id=business_id,

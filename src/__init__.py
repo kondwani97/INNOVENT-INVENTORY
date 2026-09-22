@@ -24,6 +24,9 @@ def create_app():
     
     from src.routes.auth import auth_bp
     app.register_blueprint(auth_bp)
+    
+    from src.routes.categories import categories_bp
+    app.register_blueprint(categories_bp)
 
     # Import models so Flask-Migrate can detect them
     from src.models import role  # noqa: F401

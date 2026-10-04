@@ -36,6 +36,9 @@ def create_app():
     
     from src.routes.product_variants import product_variants_bp
     app.register_blueprint(product_variants_bp)
+    
+    from src.routes.purchases import purchases_bp
+    app.register_blueprint(purchases_bp)
 
     # Import models so Flask-Migrate can detect them
     from src.models import role  # noqa: F401
